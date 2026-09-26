@@ -1,0 +1,279 @@
+<h1>4. Características do sistema</h1>
+
+<h2>4.1 Visão geral dos requisitos funcionais</h2>
+<p>Os requisitos abaixo foram extraídos das entrevistas e da observação descritas na seção 3.
+Cada um deles corresponde a um caso de uso da seção 6 e a uma tela do protótipo da seção 7.</p>
+
+<table>
+<tr><th>Código</th><th>Requisito</th><th>Ator</th><th>Prioridade</th></tr>
+<tr><td>RF01</td><td>Criar conta de aluno</td><td>Aluno</td><td>Alta</td></tr>
+<tr><td>RF02</td><td>Autenticar aluno com e-mail e senha</td><td>Aluno</td><td>Alta</td></tr>
+<tr><td>RF03</td><td>Listar grupos musculares</td><td>Aluno</td><td>Alta</td></tr>
+<tr><td>RF04</td><td>Listar exercícios do grupo muscular selecionado</td><td>Aluno</td><td>Alta</td></tr>
+<tr><td>RF05</td><td>Exibir detalhes e demonstração do exercício</td><td>Aluno</td><td>Alta</td></tr>
+<tr><td>RF06</td><td>Marcar exercício como realizado</td><td>Aluno</td><td>Alta</td></tr>
+<tr><td>RF07</td><td>Consultar histórico de exercícios realizados</td><td>Aluno</td><td>Alta</td></tr>
+<tr><td>RF08</td><td>Editar nome e foto do perfil</td><td>Aluno</td><td>Média</td></tr>
+<tr><td>RF09</td><td>Alterar senha</td><td>Aluno</td><td>Média</td></tr>
+<tr><td>RF10</td><td>Encerrar sessão</td><td>Aluno</td><td>Média</td></tr>
+<tr><td>RF11</td><td>Manter catálogo de exercícios</td><td>Instrutor</td><td>Alta</td></tr>
+<tr><td>RF12</td><td>Consultar frequência dos alunos</td><td>Instrutor</td><td>Média</td></tr>
+</table>
+
+<h2>4.2 Especificação dos requisitos funcionais</h2>
+
+<div class="req">
+<p><b>Código do requisito:</b> RF01 &nbsp;&nbsp;&nbsp; <b>Prioridade:</b> Alta</p>
+<p><b>Descrição:</b> O sistema deve permitir que o aluno crie a própria conta informando nome,
+e-mail e senha, com confirmação da senha. O e-mail é único no sistema.</p>
+<p><b>Justificativa:</b> Hoje a academia anota os alunos em planilha e ninguém tem acesso próprio
+ao treino. A conta é a porta de entrada de tudo o que vem depois.</p>
+<p><b>Origem:</b> Carlos Henrique Dutra — Proprietário e instrutor da academia.</p>
+<p><b>Critério de verificação:</b> Criar uma conta com dados válidos e entrar com ela; tentar criar
+uma segunda conta com o mesmo e-mail e conferir a recusa com mensagem clara.</p>
+<p><b>Satisfação do cliente:</b> Alta &nbsp;&nbsp; <b>Grau de estabilidade:</b> Alta</p>
+<p><b>Requisitos necessários:</b> Nenhum &nbsp;&nbsp; <b>Requisitos dependentes:</b> RF02</p>
+<p><b>Conflitos:</b> Não identificados.</p>
+<p><b>Materiais de suporte:</b> Anexo A — Entrevista com o instrutor, questão 4.</p>
+<p><b>Histórico:</b> Criado em 15 de setembro de 2026.</p>
+</div>
+
+<div class="req">
+<p><b>Código do requisito:</b> RF02 &nbsp;&nbsp;&nbsp; <b>Prioridade:</b> Alta</p>
+<p><b>Descrição:</b> O sistema deve autenticar o aluno por e-mail e senha e manter a sessão ativa
+no aparelho até que ele a encerre, sem exigir novo login a cada abertura do aplicativo.</p>
+<p><b>Justificativa:</b> O treino acontece com o celular na mão, entre uma série e outra. Um login
+a cada abertura foi apontado pelos alunos como motivo para abandonar o aplicativo.</p>
+<p><b>Origem:</b> Carlos Henrique Dutra — Instrutor; Ana Beatriz Rocha — Aluna.</p>
+<p><b>Critério de verificação:</b> Entrar com credenciais válidas, fechar e reabrir o aplicativo e
+conferir que a tela inicial abre sem pedir senha; entrar com senha errada e conferir a mensagem de
+erro.</p>
+<p><b>Satisfação do cliente:</b> Alta &nbsp;&nbsp; <b>Grau de estabilidade:</b> Alta</p>
+<p><b>Requisitos necessários:</b> RF01 &nbsp;&nbsp; <b>Requisitos dependentes:</b> RF03 a RF10</p>
+<p><b>Conflitos:</b> Não identificados.</p>
+<p><b>Materiais de suporte:</b> Anexo A — Entrevista com a aluna, questão 2.</p>
+<p><b>Histórico:</b> Criado em 15 de setembro de 2026.</p>
+</div>
+
+<div class="req">
+<p><b>Código do requisito:</b> RF03 &nbsp;&nbsp;&nbsp; <b>Prioridade:</b> Alta</p>
+<p><b>Descrição:</b> A tela inicial deve apresentar os grupos musculares cadastrados (costas,
+bíceps, tríceps, ombro, peito, pernas, abdômen) em uma lista horizontal, com o grupo selecionado em
+destaque.</p>
+<p><b>Justificativa:</b> A academia organiza os treinos por grupo muscular. É assim que o
+instrutor monta a ficha e é assim que o aluno pergunta "o que eu treino hoje".</p>
+<p><b>Origem:</b> Carlos Henrique Dutra — Instrutor.</p>
+<p><b>Critério de verificação:</b> Abrir a tela inicial e conferir a lista de grupos; tocar em um
+grupo e conferir o destaque visual.</p>
+<p><b>Satisfação do cliente:</b> Alta &nbsp;&nbsp; <b>Grau de estabilidade:</b> Alta</p>
+<p><b>Requisitos necessários:</b> RF02, RF11 &nbsp;&nbsp; <b>Requisitos dependentes:</b> RF04</p>
+<p><b>Conflitos:</b> Não identificados.</p>
+<p><b>Materiais de suporte:</b> Anexo A — Entrevista com o instrutor, questão 5; fichas de treino
+em papel analisadas em 16/09/2026.</p>
+<p><b>Histórico:</b> Criado em 15 de setembro de 2026.</p>
+</div>
+
+<div class="req">
+<p><b>Código do requisito:</b> RF04 &nbsp;&nbsp;&nbsp; <b>Prioridade:</b> Alta</p>
+<p><b>Descrição:</b> Ao selecionar um grupo muscular, o sistema deve listar os exercícios daquele
+grupo, mostrando para cada um a miniatura, o nome e a quantidade de séries e repetições.</p>
+<p><b>Justificativa:</b> Substitui a ficha de papel, que rasga, molha e fica na recepção. O aluno
+vê a série e a repetição sem precisar chamar o instrutor.</p>
+<p><b>Origem:</b> Carlos Henrique Dutra — Instrutor; Ana Beatriz Rocha — Aluna.</p>
+<p><b>Critério de verificação:</b> Selecionar o grupo "Costas" e conferir que apenas exercícios
+desse grupo aparecem, cada um com miniatura, séries e repetições.</p>
+<p><b>Satisfação do cliente:</b> Alta &nbsp;&nbsp; <b>Grau de estabilidade:</b> Alta</p>
+<p><b>Requisitos necessários:</b> RF03, RF11 &nbsp;&nbsp; <b>Requisitos dependentes:</b> RF05</p>
+<p><b>Conflitos:</b> Não identificados.</p>
+<p><b>Materiais de suporte:</b> Anexo A — Entrevista com o instrutor, questões 5 e 6.</p>
+<p><b>Histórico:</b> Criado em 15 de setembro de 2026.</p>
+</div>
+
+<div class="req">
+<p><b>Código do requisito:</b> RF05 &nbsp;&nbsp;&nbsp; <b>Prioridade:</b> Alta</p>
+<p><b>Descrição:</b> Ao tocar em um exercício, o sistema deve exibir o nome, o grupo muscular, uma
+imagem animada demonstrando a execução correta, a quantidade de séries e de repetições.</p>
+<p><b>Justificativa:</b> O instrutor atende sozinho até 30 alunos no horário de pico e não consegue
+corrigir a execução de todos. A demonstração reduz erro de postura e lesão.</p>
+<p><b>Origem:</b> Carlos Henrique Dutra — Instrutor.</p>
+<p><b>Critério de verificação:</b> Abrir o exercício "Puxada frontal" e conferir a presença da
+animação, do grupo muscular, de "3 séries" e "12 repetições".</p>
+<p><b>Satisfação do cliente:</b> Alta &nbsp;&nbsp; <b>Grau de estabilidade:</b> Alta</p>
+<p><b>Requisitos necessários:</b> RF04 &nbsp;&nbsp; <b>Requisitos dependentes:</b> RF06</p>
+<p><b>Conflitos:</b> Não identificados.</p>
+<p><b>Materiais de suporte:</b> Anexo A — Entrevista com o instrutor, questão 7; observação direta
+de 13/09/2026.</p>
+<p><b>Histórico:</b> Criado em 15 de setembro de 2026.</p>
+</div>
+
+<div class="req">
+<p><b>Código do requisito:</b> RF06 &nbsp;&nbsp;&nbsp; <b>Prioridade:</b> Alta</p>
+<p><b>Descrição:</b> Na tela do exercício, o aluno deve poder marcá-lo como realizado. O sistema
+registra o exercício, a data e a hora, confirma com uma mensagem e retorna à lista.</p>
+<p><b>Justificativa:</b> É o registro que alimenta o histórico e que permite ao instrutor saber
+quem está treinando de verdade. Hoje essa informação não existe em lugar nenhum.</p>
+<p><b>Origem:</b> Carlos Henrique Dutra — Instrutor; Ana Beatriz Rocha — Aluna.</p>
+<p><b>Critério de verificação:</b> Marcar um exercício como realizado e conferir que ele aparece
+no histórico com a data e a hora corretas.</p>
+<p><b>Satisfação do cliente:</b> Alta &nbsp;&nbsp; <b>Grau de estabilidade:</b> Alta</p>
+<p><b>Requisitos necessários:</b> RF05 &nbsp;&nbsp; <b>Requisitos dependentes:</b> RF07, RF12</p>
+<p><b>Conflitos:</b> Não identificados.</p>
+<p><b>Materiais de suporte:</b> Anexo A — Entrevista com o instrutor, questão 8.</p>
+<p><b>Histórico:</b> Criado em 15 de setembro de 2026.</p>
+</div>
+
+<div class="req">
+<p><b>Código do requisito:</b> RF07 &nbsp;&nbsp;&nbsp; <b>Prioridade:</b> Alta</p>
+<p><b>Descrição:</b> O sistema deve apresentar o histórico dos exercícios realizados pelo aluno,
+agrupados por data, em ordem do mais recente para o mais antigo, informando o grupo muscular, o
+nome do exercício e a hora.</p>
+<p><b>Justificativa:</b> A aluna relatou que não lembra o que treinou na semana anterior e acaba
+repetindo o mesmo grupo. O histórico mostra o que foi feito e o que ficou faltando.</p>
+<p><b>Origem:</b> Ana Beatriz Rocha — Aluna.</p>
+<p><b>Critério de verificação:</b> Realizar dois exercícios em dias diferentes e conferir que o
+histórico mostra dois grupos de data, com o mais recente no topo.</p>
+<p><b>Satisfação do cliente:</b> Alta &nbsp;&nbsp; <b>Grau de estabilidade:</b> Média</p>
+<p><b>Requisitos necessários:</b> RF06 &nbsp;&nbsp; <b>Requisitos dependentes:</b> Nenhum</p>
+<p><b>Conflitos:</b> Não identificados.</p>
+<p><b>Materiais de suporte:</b> Anexo A — Entrevista com a aluna, questão 4.</p>
+<p><b>Histórico:</b> Criado em 15 de setembro de 2026. Alterado em 24 de setembro de 2026, após
+a validação do protótipo, para incluir o grupo muscular em cada linha.</p>
+</div>
+
+<div class="req">
+<p><b>Código do requisito:</b> RF08 &nbsp;&nbsp;&nbsp; <b>Prioridade:</b> Média</p>
+<p><b>Descrição:</b> O aluno deve poder alterar o próprio nome e a foto do perfil, escolhendo uma
+imagem da galeria do aparelho. O e-mail é exibido, mas não pode ser alterado.</p>
+<p><b>Justificativa:</b> A foto identifica o aluno na saudação da tela inicial e na lista de
+frequência usada pelo instrutor.</p>
+<p><b>Origem:</b> Ana Beatriz Rocha — Aluna.</p>
+<p><b>Critério de verificação:</b> Trocar a foto e o nome, salvar e conferir a atualização na tela
+inicial.</p>
+<p><b>Satisfação do cliente:</b> Média &nbsp;&nbsp; <b>Grau de estabilidade:</b> Alta</p>
+<p><b>Requisitos necessários:</b> RF02 &nbsp;&nbsp; <b>Requisitos dependentes:</b> Nenhum</p>
+<p><b>Conflitos:</b> Não identificados.</p>
+<p><b>Materiais de suporte:</b> Anexo A — Entrevista com a aluna, questão 6.</p>
+<p><b>Histórico:</b> Criado em 15 de setembro de 2026.</p>
+</div>
+
+<div class="req">
+<p><b>Código do requisito:</b> RF09 &nbsp;&nbsp;&nbsp; <b>Prioridade:</b> Média</p>
+<p><b>Descrição:</b> O aluno deve poder alterar a senha informando a senha atual e a nova senha
+com confirmação. O sistema recusa senha atual incorreta e nova senha fora da política.</p>
+<p><b>Justificativa:</b> Requisito básico de segurança de conta, pedido pelo instrutor para não
+precisar redefinir senhas manualmente.</p>
+<p><b>Origem:</b> Carlos Henrique Dutra — Instrutor.</p>
+<p><b>Critério de verificação:</b> Alterar a senha, encerrar a sessão e entrar com a nova senha;
+tentar alterar informando a senha atual errada e conferir a recusa.</p>
+<p><b>Satisfação do cliente:</b> Média &nbsp;&nbsp; <b>Grau de estabilidade:</b> Alta</p>
+<p><b>Requisitos necessários:</b> RF02 &nbsp;&nbsp; <b>Requisitos dependentes:</b> Nenhum</p>
+<p><b>Conflitos:</b> Não identificados.</p>
+<p><b>Materiais de suporte:</b> Anexo A — Entrevista com o instrutor, questão 10.</p>
+<p><b>Histórico:</b> Criado em 15 de setembro de 2026.</p>
+</div>
+
+<div class="req">
+<p><b>Código do requisito:</b> RF11 &nbsp;&nbsp;&nbsp; <b>Prioridade:</b> Alta</p>
+<p><b>Descrição:</b> O instrutor deve poder cadastrar, editar e desativar exercícios no catálogo,
+informando nome, grupo muscular, séries, repetições, miniatura e animação demonstrativa. Exercício
+desativado deixa de aparecer para os alunos, mas permanece no histórico de quem já o realizou.</p>
+<p><b>Justificativa:</b> O catálogo é a base do aplicativo. O instrutor precisa incluir exercícios
+novos e ajustar séries sem depender de programador.</p>
+<p><b>Origem:</b> Carlos Henrique Dutra — Instrutor.</p>
+<p><b>Critério de verificação:</b> Cadastrar um exercício novo e conferir que ele aparece na lista
+do aluno; desativá-lo e conferir que some da lista sem sair do histórico.</p>
+<p><b>Satisfação do cliente:</b> Alta &nbsp;&nbsp; <b>Grau de estabilidade:</b> Média</p>
+<p><b>Requisitos necessários:</b> RF02 &nbsp;&nbsp; <b>Requisitos dependentes:</b> RF03, RF04</p>
+<p><b>Conflitos:</b> Não identificados.</p>
+<p><b>Materiais de suporte:</b> Anexo A — Entrevista com o instrutor, questão 9.</p>
+<p><b>Histórico:</b> Criado em 15 de setembro de 2026.</p>
+</div>
+
+<p class="nota">RF10 (encerrar sessão) e RF12 (consultar frequência dos alunos) são especificados
+de forma resumida na seção 6, pelos casos de uso UC09 e UC11, por serem operações simples cujo
+detalhamento seguiria o mesmo formato acima.</p>
+
+<h2>4.3 Requisitos não funcionais</h2>
+
+<h3>Requisitos de segurança (RSEG)</h3>
+<table>
+<tr><th>Código</th><th>Descrição</th><th>Prioridade</th><th>Verificação</th></tr>
+<tr><td>RSEG01</td><td>As senhas devem ser armazenadas apenas como hash; a política exige mínimo de
+8 caracteres com letras e números</td><td>Alta</td><td>Cadastro com senha fraca deve ser recusado; a
+senha não pode ser recuperada do banco</td></tr>
+<tr><td>RSEG02</td><td>A comunicação entre o aplicativo e o servidor deve usar HTTPS, com token de
+sessão que expira em 7 dias sem uso</td><td>Alta</td><td>Inspeção do tráfego e tentativa de uso de
+token expirado</td></tr>
+<tr><td>RSEG03</td><td>O aluno só acessa os próprios dados; o cadastro de exercícios é exclusivo do
+perfil de instrutor</td><td>Alta</td><td>Requisição ao histórico de outro aluno deve retornar acesso
+negado</td></tr>
+</table>
+
+<h3>Requisitos de desempenho (RPER)</h3>
+<table>
+<tr><th>Código</th><th>Descrição</th><th>Prioridade</th><th>Verificação</th></tr>
+<tr><td>RPER01</td><td>A lista de exercícios de um grupo deve carregar em até 2 segundos em rede
+4G</td><td>Alta</td><td>Cronometragem em 20 aberturas consecutivas</td></tr>
+<tr><td>RPER02</td><td>A confirmação de exercício realizado deve ocorrer em até 1 segundo</td><td>Alta</td><td>Cronometragem na academia, no horário de pico</td></tr>
+<tr><td>RPER03</td><td>O servidor deve atender 100 alunos simultâneos sem degradação perceptível</td><td>Média</td><td>Teste de carga com 100 sessões</td></tr>
+</table>
+
+<h3>Requisitos de usabilidade e acessibilidade (RUSA)</h3>
+<table>
+<tr><th>Código</th><th>Descrição</th><th>Prioridade</th><th>Verificação</th></tr>
+<tr><td>RUSA01</td><td>Do início do aplicativo até marcar um exercício como realizado não deve haver
+mais que três toques</td><td>Alta</td><td>Contagem de toques no protótipo validado</td></tr>
+<tr><td>RUSA02</td><td>Botões de ação devem ter no mínimo 48 pixels de altura, para uso com a mão
+suada ou com luva de treino</td><td>Média</td><td>Medição no protótipo e no aplicativo</td></tr>
+<tr><td>RUSA03</td><td>Contraste de texto e fundo conforme nível AA da WCAG 2.1; tema escuro como
+padrão, pela iluminação baixa da academia</td><td>Média</td><td>Auditoria com ferramenta de
+acessibilidade</td></tr>
+</table>
+
+<h3>Requisitos de plataforma, portabilidade e disponibilidade (RPSW, RPOR, RDISP)</h3>
+<table>
+<tr><th>Código</th><th>Descrição</th><th>Prioridade</th><th>Verificação</th></tr>
+<tr><td>RPSW01</td><td>Arquitetura cliente/servidor: aplicativo em React, instalável como PWA e
+desenhado para celular (cliente), consumindo uma API REST em Node.js (servidor) com banco de dados
+PostgreSQL</td><td>Alta</td><td>Conferência do ambiente de implantação</td></tr>
+<tr><td>RPOR01</td><td>O aplicativo deve funcionar em Android 10 ou superior e iOS 15 ou superior</td><td>Alta</td><td>Execução do fluxo principal em um aparelho de cada plataforma</td></tr>
+<tr><td>RPOR02</td><td>A última lista de exercícios carregada deve permanecer disponível sem conexão,
+e as marcações feitas sem rede devem ser enviadas quando a conexão voltar</td><td>Média</td><td>Marcar exercício com o modo avião ativo e conferir a sincronização</td></tr>
+<tr><td>RDISP01</td><td>Disponibilidade de 99% ao mês, com janela de manutenção fora do horário de
+funcionamento da academia (6h às 22h)</td><td>Média</td><td>Monitoramento mensal</td></tr>
+</table>
+
+<h3>Outros requisitos não funcionais (RNFO)</h3>
+<table>
+<tr><th>Código</th><th>Descrição</th><th>Prioridade</th><th>Verificação</th></tr>
+<tr><td>RNFO01</td><td>Tratamento de dados pessoais conforme a LGPD: coleta limitada a nome, e-mail e
+foto; exclusão da conta e do histórico a pedido do aluno; termo de consentimento no cadastro</td><td>Alta</td><td>Conferir o termo no cadastro e a rotina de exclusão</td></tr>
+<tr><td>RNFO02</td><td>As mensagens de erro devem dizer o que o usuário deve fazer, sem expor
+detalhes técnicos do servidor</td><td>Média</td><td>Revisão das mensagens nos cenários de falha</td></tr>
+<tr><td>RNFO03</td><td>Imagens e animações dos exercícios devem ser comprimidas para no máximo 300 KB
+cada, para não consumir o pacote de dados do aluno</td><td>Média</td><td>Conferência do tamanho dos
+arquivos no servidor</td></tr>
+</table>
+
+<h1>5. Restrições e premissas</h1>
+
+<h2>5.1 Premissas</h2>
+<ul>
+<li>Todos os alunos possuem smartphone Android ou iOS com acesso à internet.</li>
+<li>A academia tem Wi-Fi disponível para os alunos na área de treino.</li>
+<li>O instrutor mantém o catálogo de exercícios atualizado e revisa as séries e repetições
+padrão a cada troca de ficha.</li>
+<li>As animações demonstrativas são fornecidas pela academia ou produzidas pela própria equipe com
+consentimento das pessoas filmadas.</li>
+</ul>
+
+<h2>5.2 Restrições</h2>
+<ul>
+<li>O projeto não contempla a implementação do software: a entrega é a especificação, a
+modelagem e os protótipos validados.</li>
+<li>Não haverá ficha de treino individual por aluno nesta versão: todos os alunos veem o mesmo
+catálogo por grupo muscular, com as séries e repetições padrão definidas pelo instrutor.</li>
+<li>Não há controle financeiro, cobrança de mensalidade nem controle de acesso à catraca.</li>
+<li>Não há integração com relógios inteligentes nem com aparelhos da academia.</li>
+<li>O sistema atende uma única academia por instalação.</li>
+</ul>

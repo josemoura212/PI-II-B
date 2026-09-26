@@ -1,0 +1,331 @@
+<h1>6. Modelagem em casos de uso</h1>
+
+<h2>6.1 Diagrama de casos de uso</h2>
+<p>O diagrama abaixo representa as funcionalidades do SiGAT a partir da interação dos dois atores
+com o sistema. A fronteira delimita o que o sistema faz; o que está fora dela (o aluno e o
+instrutor) são os atores. As linhas contínuas são associações; as tracejadas indicam os
+relacionamentos <i>include</i> (comportamento obrigatório) e <i>extend</i> (comportamento
+opcional).</p>
+<figure>
+<img src="assets/casos-de-uso.png" alt="Diagrama de casos de uso do SiGAT" class="diagrama">
+<figcaption>Figura 1 – Diagrama de casos de uso do SiGAT.</figcaption>
+</figure>
+
+<h2>6.2 Relação entre requisitos e casos de uso</h2>
+<table>
+<tr><th>Caso de uso</th><th>Ator</th><th>Requisito</th><th>Relacionamentos</th></tr>
+<tr><td>UC01 – Criar conta</td><td>Aluno</td><td>RF01</td><td>—</td></tr>
+<tr><td>UC02 – Autenticar</td><td>Aluno, Instrutor</td><td>RF02</td><td>Pré-condição de UC03 a UC12</td></tr>
+<tr><td>UC03 – Selecionar grupo muscular</td><td>Aluno</td><td>RF03</td><td>Incluído por UC04</td></tr>
+<tr><td>UC04 – Consultar exercícios</td><td>Aluno</td><td>RF04</td><td>«include» UC03</td></tr>
+<tr><td>UC05 – Visualizar demonstração do exercício</td><td>Aluno</td><td>RF05</td><td>Estendido por UC06</td></tr>
+<tr><td>UC06 – Marcar exercício como realizado</td><td>Aluno</td><td>RF06</td><td>«extend» UC05</td></tr>
+<tr><td>UC07 – Consultar histórico</td><td>Aluno</td><td>RF07</td><td>—</td></tr>
+<tr><td>UC08 – Editar perfil</td><td>Aluno</td><td>RF08</td><td>Estendido por UC09</td></tr>
+<tr><td>UC09 – Alterar senha</td><td>Aluno</td><td>RF09</td><td>«extend» UC08</td></tr>
+<tr><td>UC10 – Encerrar sessão</td><td>Aluno</td><td>RF10</td><td>—</td></tr>
+<tr><td>UC11 – Manter catálogo de exercícios</td><td>Instrutor</td><td>RF11</td><td>—</td></tr>
+<tr><td>UC12 – Consultar frequência dos alunos</td><td>Instrutor</td><td>RF12</td><td>—</td></tr>
+</table>
+
+<h2>6.3 Especificação dos casos de uso principais</h2>
+
+<div class="uc">
+<p class="uctitulo">UC02 – Autenticar</p>
+<table class="ucinfo">
+<tr><td>Descrição</td><td>O usuário informa e-mail e senha para acessar o aplicativo.</td></tr>
+<tr><td>Ator principal</td><td>Aluno</td></tr>
+<tr><td>Ator secundário</td><td>Instrutor (mesma tela, perfil diferente)</td></tr>
+<tr><td>Pré-condições</td><td>Conta criada (UC01)</td></tr>
+<tr><td>Gatilho</td><td>Usuário abre o aplicativo sem sessão ativa</td></tr>
+</table>
+<table class="fluxo">
+<tr><th>Ações do ator</th><th>Ações do sistema</th></tr>
+<tr><td>1. Informa e-mail e senha e toca em "Acessar"</td><td>2. Valida o formato do e-mail e o preenchimento dos campos</td></tr>
+<tr><td></td><td>3. Confere as credenciais no servidor</td></tr>
+<tr><td></td><td>4. Cria a sessão, guarda o token no aparelho e abre a tela inicial</td></tr>
+</table>
+<p><b>Fluxo alternativo A1 – Usuário sem conta:</b> no passo 1, toca em "Criar conta"; o sistema
+abre o UC01.</p>
+<p><b>Fluxo de exceção E1 – Credenciais inválidas:</b> no passo 3, o servidor não encontra a
+combinação; o sistema exibe "E-mail ou senha incorretos" e mantém o usuário na tela.</p>
+<p><b>Fluxo de exceção E2 – Sem conexão:</b> no passo 3, a requisição falha; o sistema exibe
+"Sem conexão com o servidor. Tente novamente." e permite nova tentativa.</p>
+</div>
+
+<div class="uc">
+<p class="uctitulo">UC04 – Consultar exercícios</p>
+<table class="ucinfo">
+<tr><td>Descrição</td><td>O aluno escolhe um grupo muscular e vê os exercícios cadastrados para ele.</td></tr>
+<tr><td>Ator principal</td><td>Aluno</td></tr>
+<tr><td>Ator secundário</td><td>—</td></tr>
+<tr><td>Pré-condições</td><td>Sessão ativa (UC02); catálogo com ao menos um exercício (UC11)</td></tr>
+<tr><td>Gatilho</td><td>Aluno abre a tela inicial ou toca em um grupo muscular</td></tr>
+</table>
+<table class="fluxo">
+<tr><th>Ações do ator</th><th>Ações do sistema</th></tr>
+<tr><td></td><td>1. Exibe a saudação com o nome e a foto do aluno e a lista de grupos musculares (UC03)</td></tr>
+<tr><td>2. Toca em um grupo muscular</td><td>3. Destaca o grupo selecionado</td></tr>
+<tr><td></td><td>4. Busca no servidor os exercícios ativos do grupo</td></tr>
+<tr><td></td><td>5. Lista os exercícios com miniatura, nome, séries e repetições, e o total encontrado</td></tr>
+<tr><td>6. Toca em um exercício</td><td>7. Abre o UC05</td></tr>
+</table>
+<p><b>Fluxo alternativo A1 – Sem conexão:</b> no passo 4, o sistema exibe a última lista carregada
+para o grupo e um aviso de que os dados podem estar desatualizados.</p>
+<p><b>Fluxo de exceção E1 – Grupo sem exercícios:</b> no passo 5, a busca retorna vazio; o sistema
+exibe "Nenhum exercício cadastrado para este grupo".</p>
+</div>
+
+<div class="uc">
+<p class="uctitulo">UC06 – Marcar exercício como realizado</p>
+<table class="ucinfo">
+<tr><td>Descrição</td><td>Após visualizar a demonstração, o aluno registra que executou o exercício.</td></tr>
+<tr><td>Ator principal</td><td>Aluno</td></tr>
+<tr><td>Ator secundário</td><td>—</td></tr>
+<tr><td>Pré-condições</td><td>Tela do exercício aberta (UC05)</td></tr>
+<tr><td>Gatilho</td><td>Aluno toca em "Marcar como realizado"</td></tr>
+</table>
+<table class="fluxo">
+<tr><th>Ações do ator</th><th>Ações do sistema</th></tr>
+<tr><td>1. Toca em "Marcar como realizado"</td><td>2. Envia ao servidor o exercício, o aluno, a data e a hora</td></tr>
+<tr><td></td><td>3. Grava o registro no histórico do aluno</td></tr>
+<tr><td></td><td>4. Exibe "Parabéns! Exercício registrado no seu histórico." e retorna à lista de exercícios</td></tr>
+</table>
+<p><b>Fluxo alternativo A1 – Sem conexão:</b> no passo 2, o sistema guarda o registro no aparelho,
+informa "Registrado. Será sincronizado quando a conexão voltar." e envia ao servidor na próxima
+conexão.</p>
+<p><b>Fluxo de exceção E1 – Falha no servidor:</b> no passo 3, o servidor retorna erro; o sistema
+exibe "Não foi possível registrar. Tente novamente." e mantém o botão disponível.</p>
+</div>
+
+<div class="uc">
+<p class="uctitulo">UC07 – Consultar histórico</p>
+<table class="ucinfo">
+<tr><td>Descrição</td><td>O aluno vê os exercícios que já realizou, agrupados por dia.</td></tr>
+<tr><td>Ator principal</td><td>Aluno</td></tr>
+<tr><td>Ator secundário</td><td>—</td></tr>
+<tr><td>Pré-condições</td><td>Sessão ativa (UC02)</td></tr>
+<tr><td>Gatilho</td><td>Aluno toca no ícone de histórico no menu inferior</td></tr>
+</table>
+<table class="fluxo">
+<tr><th>Ações do ator</th><th>Ações do sistema</th></tr>
+<tr><td>1. Toca em "Histórico"</td><td>2. Busca no servidor os registros do aluno</td></tr>
+<tr><td></td><td>3. Agrupa por data, do dia mais recente para o mais antigo</td></tr>
+<tr><td></td><td>4. Exibe, em cada registro, o grupo muscular, o nome do exercício e a hora</td></tr>
+</table>
+<p><b>Fluxo de exceção E1 – Sem registros:</b> no passo 3, não há registros; o sistema exibe
+"Não há exercícios registrados ainda. Vamos treinar hoje?".</p>
+</div>
+
+<div class="uc">
+<p class="uctitulo">UC11 – Manter catálogo de exercícios</p>
+<table class="ucinfo">
+<tr><td>Descrição</td><td>O instrutor cadastra, edita ou desativa exercícios do catálogo.</td></tr>
+<tr><td>Ator principal</td><td>Instrutor</td></tr>
+<tr><td>Ator secundário</td><td>—</td></tr>
+<tr><td>Pré-condições</td><td>Sessão ativa com perfil de instrutor (UC02)</td></tr>
+<tr><td>Gatilho</td><td>Instrutor acessa a área de catálogo</td></tr>
+</table>
+<table class="fluxo">
+<tr><th>Ações do ator</th><th>Ações do sistema</th></tr>
+<tr><td>1. Escolhe "Novo exercício"</td><td>2. Exibe o formulário: nome, grupo muscular, séries, repetições, miniatura e animação</td></tr>
+<tr><td>3. Preenche e confirma</td><td>4. Valida os campos obrigatórios e o tamanho das imagens (RNFO03)</td></tr>
+<tr><td></td><td>5. Grava o exercício como ativo e o disponibiliza na lista dos alunos</td></tr>
+</table>
+<p><b>Fluxo alternativo A1 – Editar:</b> no passo 1, escolhe um exercício existente; o sistema
+abre o formulário preenchido e, ao confirmar, grava as alterações.</p>
+<p><b>Fluxo alternativo A2 – Desativar:</b> no passo 1, escolhe "Desativar"; o sistema marca o
+exercício como inativo, ele some da lista dos alunos e permanece no histórico de quem já o
+realizou.</p>
+<p><b>Fluxo de exceção E1 – Imagem acima do limite:</b> no passo 4, a animação passa de 300 KB; o
+sistema recusa e informa o limite.</p>
+</div>
+
+<p class="nota">Os demais casos de uso (UC01, UC03, UC05, UC08, UC09, UC10 e UC12) seguem o mesmo
+formato e têm fluxo direto de uma ou duas ações, descritas nos respectivos requisitos da seção 4.</p>
+
+<h1>7. Protótipo de interface</h1>
+<p>O protótipo de alta fidelidade foi construído no Figma, para iPhone 14/15 Pro Max, em tema
+escuro, e está disponível em
+<a href="https://www.figma.com/design/XsmNzKUL08eEDuwVclCDK6/Projeto-Integrador-II-B">figma.com/design/XsmNzKUL08eEDuwVclCDK6</a>.
+As seis telas cobrem todos os casos de uso do aluno; a área do instrutor (UC11 e UC12) é
+administrativa e será prototipada na etapa de implementação.</p>
+
+<h2>7.1 Fluxo de navegação</h2>
+<p>Login → (Criar conta) → Home → Exercício → Marcar como realizado → Home. O menu inferior, presente
+em todas as telas internas, leva a Home, Histórico e Perfil. Do início do aplicativo até marcar um
+exercício como realizado são três toques: grupo muscular, exercício e "Marcar como realizado",
+atendendo ao RUSA01.</p>
+
+<div class="telas">
+<figure><img src="assets/telas/01-login.png" alt="Tela de login"><figcaption>Tela 01 – Login (UC02)</figcaption></figure>
+<figure><img src="assets/telas/02-signup.png" alt="Tela de cadastro"><figcaption>Tela 02 – Criar conta (UC01)</figcaption></figure>
+<figure><img src="assets/telas/03-home.png" alt="Tela inicial"><figcaption>Tela 03 – Home: grupos e exercícios (UC03, UC04, UC10)</figcaption></figure>
+</div>
+<div class="telas">
+<figure><img src="assets/telas/04-exercise.png" alt="Tela do exercício"><figcaption>Tela 04 – Exercício e demonstração (UC05, UC06)</figcaption></figure>
+<figure><img src="assets/telas/05-history.png" alt="Tela de histórico"><figcaption>Tela 05 – Histórico (UC07)</figcaption></figure>
+<figure><img src="assets/telas/06-profile.png" alt="Tela de perfil"><figcaption>Tela 06 – Perfil e senha (UC08, UC09)</figcaption></figure>
+</div>
+<p class="legenda">Figura 2 – Telas do protótipo de alta fidelidade.</p>
+
+<h2>7.2 Decisões de interface tomadas a partir do levantamento</h2>
+<ul>
+<li><b>Tema escuro como padrão</b> (RUSA03): a iluminação do salão é baixa e a tela clara
+incomodava na observação.</li>
+<li><b>Botões de 56 px de altura</b> (RUSA02): os alunos erravam toques com a mão suada.</li>
+<li><b>Grupos musculares em lista horizontal</b> (RF03): reproduz a forma como o instrutor
+organiza a semana de treino.</li>
+<li><b>Séries e repetições visíveis já na lista</b> (RF04): o aluno não precisa abrir o exercício
+só para conferir a carga de trabalho.</li>
+<li><b>Botão "Marcar como realizado" na própria tela do exercício</b> (RF06): registrar leva um
+toque, sem navegação adicional.</li>
+</ul>
+
+<h1>8. Validação com os usuários</h1>
+<p>Os requisitos e os protótipos foram apresentados aos dois entrevistados em uma sessão única na
+academia. Cada participante navegou pelo protótipo no Figma, no próprio celular, executando as
+tarefas propostas pela equipe enquanto comentava em voz alta.</p>
+
+<table>
+<tr><th>Item</th><th>Registro</th></tr>
+<tr><td>Data</td><td>24/09/2026, das 19h às 20h15, na Academia Corpo em Movimento</td></tr>
+<tr><td>Participantes</td><td>Carlos Henrique Dutra (proprietário e instrutor); Ana Beatriz Rocha (aluna há oito meses)</td></tr>
+<tr><td>Requisitos avaliados</td><td>RF01 a RF10 e as exigências de usabilidade RUSA01 a RUSA03</td></tr>
+<tr><td>Telas avaliadas</td><td>Telas 01 a 06</td></tr>
+<tr><td>Tarefas propostas</td><td>Criar conta; entrar; encontrar a "Remada curvada"; marcar como realizada; conferir
+no histórico; trocar a foto do perfil</td></tr>
+</table>
+
+<h2>8.1 Sugestões e problemas apontados</h2>
+<table>
+<tr><th>#</th><th>Quem</th><th>Apontamento</th><th>Decisão</th></tr>
+<tr><td>1</td><td>Aluna</td><td>No histórico, só o nome do exercício não bastava: "Remada eu faço para costas e para
+ombro, quero saber qual foi"</td><td>Aceito. RF07 alterado para exibir o grupo muscular em cada registro; tela 05 ajustada</td></tr>
+<tr><td>2</td><td>Instrutor</td><td>O total de exercícios do grupo deveria aparecer na lista, para o aluno saber quantos
+faltam</td><td>Aceito. Contador adicionado ao lado do título "Exercícios" na tela 03</td></tr>
+<tr><td>3</td><td>Aluna</td><td>Queria receber lembrete quando ficasse três dias sem treinar</td><td>Registrado
+como requisito futuro. Fora do escopo desta versão, por depender de notificação push</td></tr>
+<tr><td>4</td><td>Instrutor</td><td>Perguntou se poderia montar ficha individual por aluno</td><td>Registrado como requisito
+futuro e mantido como restrição (seção 5.2): nesta versão o catálogo é único por grupo muscular</td></tr>
+<tr><td>5</td><td>Ambos</td><td>Confirmaram que três toques até registrar o exercício é adequado para uso entre as
+séries</td><td>RUSA01 validado sem alteração</td></tr>
+</table>
+
+<h2>8.2 Resultado</h2>
+<p>Os dois participantes concluíram todas as tarefas sem ajuda. Os apontamentos 1 e 2 foram
+incorporados ao documento e ao protótipo em 24/09/2026; os apontamentos 3 e 4 ficaram registrados
+para a próxima versão. O instrutor validou a lista de requisitos como fiel ao que foi conversado na
+entrevista.</p>
+
+<h1>9. Matriz de rastreabilidade</h1>
+<table>
+<tr><th>Requisito</th><th>Caso de uso</th><th>Protótipo / tela</th><th>Origem</th><th>Validado?</th></tr>
+<tr><td>RF01 – Criar conta</td><td>UC01</td><td>Tela 02</td><td>Instrutor</td><td>Sim</td></tr>
+<tr><td>RF02 – Autenticar</td><td>UC02</td><td>Tela 01</td><td>Instrutor, Aluna</td><td>Sim</td></tr>
+<tr><td>RF03 – Listar grupos musculares</td><td>UC03</td><td>Tela 03</td><td>Instrutor</td><td>Sim</td></tr>
+<tr><td>RF04 – Listar exercícios do grupo</td><td>UC04</td><td>Tela 03</td><td>Instrutor, Aluna</td><td>Sim (ajuste 2)</td></tr>
+<tr><td>RF05 – Exibir demonstração</td><td>UC05</td><td>Tela 04</td><td>Instrutor</td><td>Sim</td></tr>
+<tr><td>RF06 – Marcar como realizado</td><td>UC06</td><td>Tela 04</td><td>Instrutor, Aluna</td><td>Sim</td></tr>
+<tr><td>RF07 – Consultar histórico</td><td>UC07</td><td>Tela 05</td><td>Aluna</td><td>Sim (ajuste 1)</td></tr>
+<tr><td>RF08 – Editar perfil</td><td>UC08</td><td>Tela 06</td><td>Aluna</td><td>Sim</td></tr>
+<tr><td>RF09 – Alterar senha</td><td>UC09</td><td>Tela 06</td><td>Instrutor</td><td>Sim</td></tr>
+<tr><td>RF10 – Encerrar sessão</td><td>UC10</td><td>Tela 03 (ícone de saída)</td><td>Aluna</td><td>Sim</td></tr>
+<tr><td>RF11 – Manter catálogo</td><td>UC11</td><td>Área do instrutor (próxima etapa)</td><td>Instrutor</td><td>Requisito validado; tela pendente</td></tr>
+<tr><td>RF12 – Consultar frequência</td><td>UC12</td><td>Área do instrutor (próxima etapa)</td><td>Instrutor</td><td>Requisito validado; tela pendente</td></tr>
+</table>
+
+<h1>10. Sustentabilidade e preocupação com o meio ambiente</h1>
+<p>A primeira contribuição do SiGAT ao meio ambiente é direta: a eliminação da ficha de treino em
+papel. Na academia atendida, cada aluno recebe uma ficha nova a cada troca de treino, a cada dois
+meses, e as fichas danificadas são reimpressas no meio do caminho. Com 180 alunos ativos, isso
+representa mais de mil folhas impressas por ano, além dos cartuchos de tinta e dos fichários
+plásticos que as guardam. O aplicativo substitui esse fluxo por um registro digital que não rasga,
+não se perde e não precisa ser refeito quando o instrutor ajusta as séries.</p>
+<p>A segunda contribuição está na forma como o sistema foi especificado. Os requisitos RNFO03 e
+RPOR02 limitam o tamanho das imagens e reaproveitam os dados já carregados no aparelho, o que
+reduz o tráfego de rede e o consumo de energia dos servidores e dos celulares. A arquitetura
+cliente/servidor em contêineres permite hospedar o sistema em uma única instância pequena,
+dimensionada para os cem alunos simultâneos do RPER03, em vez de infraestrutura ociosa. Por fim, o
+uso do celular que o aluno já possui, sem exigir tablet ou totem na academia, evita a compra de
+equipamento eletrônico novo e o descarte que viria depois.</p>
+
+<h1>11. Glossário</h1>
+<table>
+<tr><th>Termo</th><th>Descrição</th></tr>
+<tr><td>Aluno</td><td>Pessoa matriculada na academia que usa o aplicativo para treinar</td></tr>
+<tr><td>Instrutor</td><td>Profissional de educação física que mantém o catálogo e acompanha os alunos</td></tr>
+<tr><td>Catálogo de exercícios</td><td>Conjunto de exercícios cadastrados, organizados por grupo muscular</td></tr>
+<tr><td>Grupo muscular</td><td>Categoria de treino: costas, bíceps, tríceps, ombro, peito, pernas ou abdômen</td></tr>
+<tr><td>Série</td><td>Bloco de execução contínua de um exercício; o treino padrão prevê três séries</td></tr>
+<tr><td>Repetição</td><td>Cada movimento completo dentro de uma série</td></tr>
+<tr><td>Demonstração</td><td>Imagem animada que mostra a execução correta do exercício</td></tr>
+<tr><td>Registro de treino</td><td>Anotação de que o aluno realizou um exercício, com data e hora</td></tr>
+<tr><td>Histórico</td><td>Lista dos registros de treino do aluno, agrupada por dia</td></tr>
+<tr><td>Sessão</td><td>Período em que o aluno permanece autenticado no aparelho sem repetir o login</td></tr>
+<tr><td>Frequência</td><td>Quantidade de dias em que o aluno registrou ao menos um exercício</td></tr>
+</table>
+
+<h1>12. Conclusão</h1>
+<p>O trabalho partiu de um problema concreto — a ficha de treino em papel de uma academia de
+Goiânia — e percorreu o caminho completo da engenharia de requisitos: entrevistas com o
+proprietário e com uma aluna, observação do salão no horário de pico, análise das fichas e da
+planilha de matrículas, especificação de doze requisitos funcionais e quinze não funcionais,
+modelagem em doze casos de uso, prototipação de seis telas e validação com os próprios usuários,
+que resultou em dois ajustes incorporados e dois requisitos registrados para a próxima versão.</p>
+<p>A principal aprendizagem do grupo foi a ligação entre os artefatos: cada pergunta da entrevista
+virou um requisito, cada requisito virou um caso de uso, e cada caso de uso tem uma tela que o
+usuário conseguiu operar sem ajuda. O SiGAT segue a arquitetura cliente/servidor exigida pela
+disciplina. Como complemento à especificação, o grupo implementou uma versão de referência do
+aplicativo em React e da API em Node.js, disponível no repositório do projeto, que executa os
+casos de uso do aluno de ponta a ponta.</p>
+
+<h1 class="anexo">Anexo A – Roteiro e respostas das entrevistas</h1>
+
+<h2>A.1 Entrevista com Carlos Henrique Dutra — proprietário e instrutor (13/09/2026)</h2>
+<ol class="entrevista">
+<li><b>Como funciona hoje a prescrição de treino para um aluno novo?</b><br>
+"Eu converso com ele, vejo o objetivo e monto a ficha à mão. A ficha fica no fichário da recepção
+e ele pega quando chega. A cada dois meses eu refaço."</li>
+<li><b>Quantos alunos você atende ao mesmo tempo no horário de pico?</b><br>
+"Das seis às oito da noite dá uns 25, 30. Sozinho. O outro instrutor fica de manhã."</li>
+<li><b>O que mais toma o seu tempo durante o treino?</b><br>
+"Explicar execução. Eu explico a puxada frontal umas vinte vezes por dia. O aluno olha a ficha,
+vê o nome e não sabe o que é."</li>
+<li><b>Como você sabe quem está frequentando?</b><br>
+"Não sei. Só descubro que o cara parou quando a mensalidade atrasa. Aí já perdi o aluno."</li>
+<li><b>Como você organiza os exercícios?</b><br>
+"Por grupo muscular. Segunda é costas e bíceps, terça é peito e tríceps, e assim vai. Todo aluno
+segue essa divisão, o que muda é a carga."</li>
+<li><b>O que precisa estar na ficha, no mínimo?</b><br>
+"Nome do exercício, quantas séries e quantas repetições. O resto eu ajusto na hora."</li>
+<li><b>Se o aluno pudesse ver alguma coisa no celular, o que ajudaria mais?</b><br>
+"O movimento. Um vídeo curto ou uma imagem mostrando a posição certa. Isso me pouparia metade
+das chamadas."</li>
+<li><b>Você gostaria de saber o que cada aluno fez no dia?</b><br>
+"Com certeza. Se ele marcou que fez, eu sei que ele veio e sei o que ele treinou. Hoje não tenho
+nada."</li>
+<li><b>Com que frequência você muda os exercícios e as séries?</b><br>
+"Séries e repetições, a cada dois meses. Exercício novo, quando compro aparelho ou quando vejo
+algo bom. Eu preciso mudar isso sem depender de ninguém."</li>
+<li><b>Que preocupações você tem com a conta do aluno?</b><br>
+"Que ele mesmo consiga criar e trocar a senha. Não quero ficar redefinindo senha na recepção."</li>
+</ol>
+
+<h2>A.2 Entrevista com Ana Beatriz Rocha — aluna (13/09/2026)</h2>
+<ol class="entrevista">
+<li><b>Como você usa a ficha de treino hoje?</b><br>
+"Pego na recepção, levo para o salão, e volto para deixar. Já perdi duas."</li>
+<li><b>Você já usou algum aplicativo de treino?</b><br>
+"Usei um, mas ele pedia login toda vez que eu abria. Entre uma série e outra isso não dá.
+Desinstalei."</li>
+<li><b>O que você faz quando não sabe executar um exercício?</b><br>
+"Espero o Carlos ficar livre. Às vezes demora dez minutos. Ou eu faço do meu jeito."</li>
+<li><b>Você lembra o que treinou na semana passada?</b><br>
+"Não. Às vezes eu repito costas dois dias seguidos sem perceber. Queria ver o que já fiz, com o
+grupo, não só o nome."</li>
+<li><b>Como você usa o celular durante o treino?</b><br>
+"Com a mão suada, entre as séries, com pressa. Botão pequeno eu erro."</li>
+<li><b>O que você gostaria de ter no seu perfil?</b><br>
+"Minha foto e meu nome, para ficar meu. E trocar a senha sem pedir para ninguém."</li>
+</ol>
