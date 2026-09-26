@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="790" viewBox="0 0 1100 790" font-family="Arial, Helvetica, sans-serif">
+<defs>
+<marker id="arr" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+<path d="M0,0 L12,6 L0,12" fill="none" stroke="#222" stroke-width="1.6"/>
+</marker>
+</defs>
+<rect width="1100" height="790" fill="#fff"/>
+
+<!-- fronteira do sistema -->
+<rect x="220" y="50" width="640" height="700" fill="none" stroke="#222" stroke-width="1.8"/>
+<text x="540" y="80" text-anchor="middle" font-size="18" font-weight="bold" fill="#222">SiGAT – Sistema de Gestão e Acompanhamento de Treinos</text>
+
+<!-- ator Aluno -->
+<g stroke="#222" stroke-width="2" fill="none">
+<circle cx="90" cy="360" r="14"/>
+<line x1="90" y1="374" x2="90" y2="418"/>
+<line x1="62" y1="390" x2="118" y2="390"/>
+<line x1="90" y1="418" x2="68" y2="452"/>
+<line x1="90" y1="418" x2="112" y2="452"/>
+</g>
+<text x="90" y="476" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">Aluno</text>
+
+<!-- ator Instrutor -->
+<g stroke="#222" stroke-width="2" fill="none">
+<circle cx="1010" cy="240" r="14"/>
+<line x1="1010" y1="254" x2="1010" y2="298"/>
+<line x1="982" y1="270" x2="1038" y2="270"/>
+<line x1="1010" y1="298" x2="988" y2="332"/>
+<line x1="1010" y1="298" x2="1032" y2="332"/>
+</g>
+<text x="1010" y="356" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">Instrutor</text>
+
+<!-- associações do Aluno -->
+<g stroke="#222" stroke-width="1.4">
+<line x1="112" y1="400" x2="275" y2="120"/>
+<line x1="112" y1="400" x2="275" y2="210"/>
+<line x1="112" y1="400" x2="275" y2="310"/>
+<line x1="112" y1="400" x2="275" y2="410"/>
+<line x1="112" y1="400" x2="275" y2="510"/>
+<line x1="112" y1="400" x2="275" y2="610"/>
+<line x1="112" y1="400" x2="275" y2="700"/>
+</g>
+
+<!-- associações do Instrutor -->
+<g stroke="#222" stroke-width="1.4">
+<line x1="988" y1="290" x2="795" y2="120"/>
+<line x1="988" y1="290" x2="465" y2="210"/>
+<line x1="988" y1="290" x2="795" y2="510"/>
+</g>
+
+<!-- include / extend -->
+<g stroke="#222" stroke-width="1.4" stroke-dasharray="7,5" fill="none">
+<line x1="465" y1="310" x2="604" y2="310" marker-end="url(#arr)"/>
+<line x1="605" y1="410" x2="466" y2="410" marker-end="url(#arr)"/>
+<line x1="605" y1="610" x2="466" y2="610" marker-end="url(#arr)"/>
+</g>
+<text x="535" y="300" text-anchor="middle" font-size="13" fill="#222">«include»</text>
+<text x="535" y="400" text-anchor="middle" font-size="13" fill="#222">«extend»</text>
+<text x="535" y="600" text-anchor="middle" font-size="13" fill="#222">«extend»</text>
+
+<!-- casos de uso — coluna A -->
+<g fill="#fff" stroke="#222" stroke-width="1.6">
+<ellipse cx="370" cy="120" rx="95" ry="32"/>
+<ellipse cx="370" cy="210" rx="95" ry="32"/>
+<ellipse cx="370" cy="310" rx="95" ry="32"/>
+<ellipse cx="370" cy="410" rx="95" ry="32"/>
+<ellipse cx="370" cy="510" rx="95" ry="32"/>
+<ellipse cx="370" cy="610" rx="95" ry="32"/>
+<ellipse cx="370" cy="700" rx="95" ry="32"/>
+</g>
+<g font-size="13" fill="#222" text-anchor="middle">
+<text x="370" y="116">UC01</text><text x="370" y="132">Criar conta</text>
+<text x="370" y="206">UC02</text><text x="370" y="222">Autenticar</text>
+<text x="370" y="306">UC04</text><text x="370" y="322">Consultar exercícios</text>
+<text x="370" y="400">UC05</text><text x="370" y="416">Visualizar demonstração</text><text x="370" y="430">do exercício</text>
+<text x="370" y="506">UC07</text><text x="370" y="522">Consultar histórico</text>
+<text x="370" y="606">UC08</text><text x="370" y="622">Editar perfil</text>
+<text x="370" y="696">UC10</text><text x="370" y="712">Encerrar sessão</text>
+</g>
+
+<!-- casos de uso — coluna B -->
+<g fill="#fff" stroke="#222" stroke-width="1.6">
+<ellipse cx="700" cy="120" rx="95" ry="32"/>
+<ellipse cx="700" cy="310" rx="95" ry="32"/>
+<ellipse cx="700" cy="410" rx="95" ry="32"/>
+<ellipse cx="700" cy="510" rx="95" ry="32"/>
+<ellipse cx="700" cy="610" rx="95" ry="32"/>
+</g>
+<g font-size="13" fill="#222" text-anchor="middle">
+<text x="700" y="110">UC11</text><text x="700" y="126">Manter catálogo</text><text x="700" y="140">de exercícios</text>
+<text x="700" y="300">UC03</text><text x="700" y="316">Selecionar grupo</text><text x="700" y="330">muscular</text>
+<text x="700" y="400">UC06</text><text x="700" y="416">Marcar exercício</text><text x="700" y="430">como realizado</text>
+<text x="700" y="500">UC12</text><text x="700" y="516">Consultar frequência</text><text x="700" y="530">dos alunos</text>
+<text x="700" y="606">UC09</text><text x="700" y="622">Alterar senha</text>
+</g>
+</svg>
